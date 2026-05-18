@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent Memory Kernel Prototype 使い方ガイド</title>
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #5a6673;
+      --line: #d7dde3;
+      --bg: #f7f8fa;
+      --panel: #ffffff;
+      --accent: #1f7a68;
+      --accent-2: #365d9d;
+      --warn: #ad5c00;
+      --soft: #e8f3f0;
+      --soft-2: #edf2fb;
+      --soft-warn: #fff4e4;
+      --code: #101418;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.65;
+    }
+
+    header {
+      background: var(--panel);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 42px 0 32px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    main {
+      padding: 28px 0 56px;
+    }
+
+    section {
+      margin: 28px 0;
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 24px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 24px 0 10px;
+      font-size: 18px;
+      line-height: 1.3;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    ul,
+    ol {
+      margin: 8px 0 0;
+      padding-left: 22px;
+    }
+
+    li + li {
+      margin-top: 6px;
+    }
+
+    code,
+    pre {
+      font-family: "Cascadia Mono", Consolas, Menlo, monospace;
+    }
+
+    code {
+      padding: 2px 5px;
+      color: var(--code);
+      background: #eef1f4;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+
+    pre {
+      overflow-x: auto;
+      margin: 12px 0 0;
+      padding: 16px;
+      color: #f4f7fa;
+      background: #101418;
+      border-radius: 8px;
+      line-height: 1.55;
+    }
+
+    pre code {
+      padding: 0;
+      color: inherit;
+      background: transparent;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .mini-card {
+      padding: 16px;
+      background: #fbfcfd;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .mini-card h3 {
+      margin-top: 0;
+    }
+
+    .note {
+      padding: 14px 16px;
+      background: var(--soft-warn);
+      border-left: 4px solid var(--warn);
+      border-radius: 6px;
+      color: #53320a;
+    }
+
+    .diagram {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin-top: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .diagram text {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      fill: var(--ink);
+      letter-spacing: 0;
+    }
+
+    .caption {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .path-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .path-row {
+      display: grid;
+      grid-template-columns: minmax(210px, 330px) 1fr;
+      gap: 14px;
+      padding: 12px;
+      background: #fbfcfd;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .path-row strong {
+      font-family: "Cascadia Mono", Consolas, Menlo, monospace;
+      font-size: 14px;
+    }
+
+    .checklist {
+      columns: 2;
+      column-gap: 36px;
+    }
+
+    .checklist li {
+      break-inside: avoid;
+    }
+
+    footer {
+      padding: 24px 0 38px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 780px) {
+      .grid.two,
+      .grid.three,
+      .path-row {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 20px;
+      }
+
+      .checklist {
+        columns: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero">
+      <p class="eyebrow">Agent Memory Kernel Prototype</p>
+      <h1>使い方ガイド</h1>
+      <p class="lead">
+        このプロトタイプは、リポジトリ内の正本ドキュメントと外部 Obsidian vault を分けて扱い、
+        Codex や Claude Code が安全に作業記憶を残せるようにするための土台です。
+      </p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section>
+      <h2>一目で見る全体像</h2>
+      <p>
+        正本は常に <code>docs/</code> です。外部 vault は検索、提案、session summary の置き場であり、
+        自動生成メモは <code>00-inbox/</code> に入れてからレビューします。
+      </p>
+
+      <svg class="diagram" viewBox="0 0 1040 430" role="img" aria-label="Agent Memory Kernel の全体構成図">
+        <defs>
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#627181"></path>
+          </marker>
+          <filter id="shadow" x="-8%" y="-8%" width="116%" height="116%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0b1720" flood-opacity="0.12"></feDropShadow>
+          </filter>
+        </defs>
+
+        <rect x="40" y="48" width="230" height="120" rx="8" fill="#edf2fb" stroke="#b8c7e6" filter="url(#shadow)"></rect>
+        <text x="155" y="88" text-anchor="middle" font-size="20" font-weight="700">Coding Agents</text>
+        <text x="155" y="122" text-anchor="middle" font-size="15">Codex / Claude Code</text>
+        <text x="155" y="146" text-anchor="middle" font-size="15">README と boot map を読む</text>
+
+        <rect x="400" y="38" width="250" height="140" rx="8" fill="#e8f3f0" stroke="#9fcabe" filter="url(#shadow)"></rect>
+        <text x="525" y="80" text-anchor="middle" font-size="20" font-weight="700">Repo Docs</text>
+        <text x="525" y="114" text-anchor="middle" font-size="15">docs/ が正本</text>
+        <text x="525" y="138" text-anchor="middle" font-size="15">review / CI / Git の対象</text>
+
+        <rect x="770" y="48" width="230" height="120" rx="8" fill="#fff4e4" stroke="#e4c58f" filter="url(#shadow)"></rect>
+        <text x="885" y="88" text-anchor="middle" font-size="20" font-weight="700">External Vault</text>
+        <text x="885" y="122" text-anchor="middle" font-size="15">Obsidian-compatible</text>
+        <text x="885" y="146" text-anchor="middle" font-size="15">補助情報として扱う</text>
+
+        <rect x="400" y="260" width="250" height="110" rx="8" fill="#ffffff" stroke="#d7dde3" filter="url(#shadow)"></rect>
+        <text x="525" y="300" text-anchor="middle" font-size="20" font-weight="700">Enforcement</text>
+        <text x="525" y="334" text-anchor="middle" font-size="15">hooks / scripts / tests</text>
+        <text x="525" y="358" text-anchor="middle" font-size="15">秘密情報と肥大化を防ぐ</text>
+
+        <line x1="270" y1="108" x2="395" y2="108" stroke="#627181" stroke-width="3" marker-end="url(#arrow)"></line>
+        <text x="333" y="92" text-anchor="middle" font-size="14" fill="#5a6673">先に読む</text>
+
+        <line x1="650" y1="108" x2="765" y2="108" stroke="#627181" stroke-width="3" marker-end="url(#arrow)"></line>
+        <text x="708" y="92" text-anchor="middle" font-size="14" fill="#5a6673">不足時だけ検索</text>
+
+        <line x1="885" y1="168" x2="885" y2="226" stroke="#627181" stroke-width="3"></line>
+        <line x1="885" y1="226" x2="650" y2="315" stroke="#627181" stroke-width="3" marker-end="url(#arrow)"></line>
+        <text x="790" y="250" text-anchor="middle" font-size="14" fill="#5a6673">inbox 書き込みを検査</text>
+
+        <line x1="525" y1="178" x2="525" y2="255" stroke="#627181" stroke-width="3" marker-end="url(#arrow)"></line>
+        <text x="598" y="220" text-anchor="middle" font-size="14" fill="#5a6673">CI で検証</text>
+
+        <line x1="400" y1="315" x2="170" y2="315" stroke="#627181" stroke-width="3" marker-end="url(#arrow)"></line>
+        <text x="285" y="298" text-anchor="middle" font-size="14" fill="#5a6673">結果を agent が報告</text>
+      </svg>
+      <p class="caption">図のポイント: 外部 memory は正本ではありません。repo docs と検証コマンドが判断の基準です。</p>
+    </section>
+
+    <section>
+      <h2>最初に読むファイル</h2>
+      <div class="grid three">
+        <div class="mini-card">
+          <h3>Codex / 汎用 agent</h3>
+          <p><code>AGENTS.md</code> を読む。正本 docs、検証、memory policy の入口です。</p>
+        </div>
+        <div class="mini-card">
+          <h3>Claude Code</h3>
+          <p><code>CLAUDE.md</code> から <code>AGENTS.md</code> を参照し、Claude 固有ルールも読む。</p>
+        </div>
+        <div class="mini-card">
+          <h3>人間の確認</h3>
+          <p><code>README.md</code> と <code>docs/ai/INDEX.md</code> を見ると、構成と運用が追えます。</p>
+        </div>
+      </div>
+
+      <div class="path-list">
+        <div class="path-row">
+          <strong>docs/ai/MEMORY_POLICY.md</strong>
+          <span>memory に保存してよい情報、禁止情報、信頼レベル、昇格ルール。</span>
+        </div>
+        <div class="path-row">
+          <strong>docs/runbooks/build-test-lint.md</strong>
+          <span>検証コマンド一覧。完了報告前にここにある関連コマンドを実行します。</span>
+        </div>
+        <div class="path-row">
+          <strong>docs/pitfalls/known-failures.md</strong>
+          <span>既知の失敗、罠、回避策。テスト修正やデバッグ前に確認します。</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>普段の使い方</h2>
+      <p>非自明な作業では、agent は次の順番で動きます。</p>
+
+      <svg class="diagram" viewBox="0 0 1040 360" role="img" aria-label="作業開始から終了までの手順">
+        <defs>
+          <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#627181"></path>
+          </marker>
+        </defs>
+
+        <g font-size="14">
+          <rect x="40" y="70" width="160" height="88" rx="8" fill="#edf2fb" stroke="#b8c7e6"></rect>
+          <text x="120" y="103" text-anchor="middle" font-weight="700" font-size="17">1. Boot</text>
+          <text x="120" y="130" text-anchor="middle">AGENTS / CLAUDE</text>
+
+          <rect x="250" y="70" width="160" height="88" rx="8" fill="#e8f3f0" stroke="#9fcabe"></rect>
+          <text x="330" y="103" text-anchor="middle" font-weight="700" font-size="17">2. Repo docs</text>
+          <text x="330" y="130" text-anchor="middle">INDEX から辿る</text>
+
+          <rect x="460" y="70" width="160" height="88" rx="8" fill="#fff" stroke="#d7dde3"></rect>
+          <text x="540" y="103" text-anchor="middle" font-weight="700" font-size="17">3. Work</text>
+          <text x="540" y="130" text-anchor="middle">変更と検証</text>
+
+          <rect x="670" y="70" width="160" height="88" rx="8" fill="#fff4e4" stroke="#e4c58f"></rect>
+          <text x="750" y="103" text-anchor="middle" font-weight="700" font-size="17">4. Proposal</text>
+          <text x="750" y="130" text-anchor="middle">必要なら inbox</text>
+
+          <rect x="880" y="70" width="120" height="88" rx="8" fill="#fff" stroke="#d7dde3"></rect>
+          <text x="940" y="103" text-anchor="middle" font-weight="700" font-size="17">5. Review</text>
+          <text x="940" y="130" text-anchor="middle">人間が昇格</text>
+
+          <line x1="200" y1="114" x2="245" y2="114" stroke="#627181" stroke-width="3" marker-end="url(#arrow2)"></line>
+          <line x1="410" y1="114" x2="455" y2="114" stroke="#627181" stroke-width="3" marker-end="url(#arrow2)"></line>
+          <line x1="620" y1="114" x2="665" y2="114" stroke="#627181" stroke-width="3" marker-end="url(#arrow2)"></line>
+          <line x1="830" y1="114" x2="875" y2="114" stroke="#627181" stroke-width="3" marker-end="url(#arrow2)"></line>
+
+          <rect x="250" y="230" width="580" height="78" rx="8" fill="#f7f8fa" stroke="#d7dde3"></rect>
+          <text x="540" y="262" text-anchor="middle" font-weight="700" font-size="17">外部 memory は不足時だけ使う</text>
+          <text x="540" y="290" text-anchor="middle">検索結果は補助情報。repo docs / code / tests で確認してから使う。</text>
+
+          <line x1="750" y1="158" x2="750" y2="225" stroke="#627181" stroke-width="3" marker-end="url(#arrow2)"></line>
+        </g>
+      </svg>
+
+      <h3>作業開始時の指示例</h3>
+      <pre><code>docs/ai/INDEX.md を読んで、この変更に必要な docs を確認してから作業して。
+外部 memory は不足した場合だけ検索して。新しい知見は proposal として 00-inbox に置いて。</code></pre>
+
+      <h3>作業終了時の指示例</h3>
+      <pre><code>変更内容、実行した検証コマンド、未検証項目、memory delta をまとめて。
+昇格が必要な知見があれば memory proposal として作って。</code></pre>
+    </section>
+
+    <section>
+      <h2>Memory proposal の流れ</h2>
+      <p>
+        agent が得た知見は、いきなり <code>docs/</code> に入れません。
+        まず review 可能な proposal にしてから、人間が昇格先を決めます。
+      </p>
+
+      <svg class="diagram" viewBox="0 0 1040 330" role="img" aria-label="Memory proposal の昇格フロー">
+        <defs>
+          <marker id="arrow3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#627181"></path>
+          </marker>
+        </defs>
+
+        <rect x="60" y="80" width="180" height="90" rx="8" fill="#edf2fb" stroke="#b8c7e6"></rect>
+        <text x="150" y="115" text-anchor="middle" font-size="18" font-weight="700">Observation</text>
+        <text x="150" y="145" text-anchor="middle" font-size="14">作業中の発見</text>
+
+        <rect x="310" y="80" width="200" height="90" rx="8" fill="#fff4e4" stroke="#e4c58f"></rect>
+        <text x="410" y="115" text-anchor="middle" font-size="18" font-weight="700">00-inbox</text>
+        <text x="410" y="145" text-anchor="middle" font-size="14">proposal として保存</text>
+
+        <rect x="580" y="80" width="180" height="90" rx="8" fill="#fff" stroke="#d7dde3"></rect>
+        <text x="670" y="115" text-anchor="middle" font-size="18" font-weight="700">Review</text>
+        <text x="670" y="145" text-anchor="middle" font-size="14">証拠と機密性を確認</text>
+
+        <rect x="830" y="40" width="160" height="70" rx="8" fill="#e8f3f0" stroke="#9fcabe"></rect>
+        <text x="910" y="70" text-anchor="middle" font-size="17" font-weight="700">Promote</text>
+        <text x="910" y="94" text-anchor="middle" font-size="13">repo docs へ</text>
+
+        <rect x="830" y="150" width="160" height="70" rx="8" fill="#f7f8fa" stroke="#d7dde3"></rect>
+        <text x="910" y="180" text-anchor="middle" font-size="17" font-weight="700">Archive</text>
+        <text x="910" y="204" text-anchor="middle" font-size="13">重複 / stale</text>
+
+        <line x1="240" y1="125" x2="305" y2="125" stroke="#627181" stroke-width="3" marker-end="url(#arrow3)"></line>
+        <line x1="510" y1="125" x2="575" y2="125" stroke="#627181" stroke-width="3" marker-end="url(#arrow3)"></line>
+        <line x1="760" y1="105" x2="825" y2="75" stroke="#627181" stroke-width="3" marker-end="url(#arrow3)"></line>
+        <line x1="760" y1="145" x2="825" y2="185" stroke="#627181" stroke-width="3" marker-end="url(#arrow3)"></line>
+
+        <rect x="310" y="245" width="450" height="52" rx="8" fill="#fff" stroke="#d7dde3"></rect>
+        <text x="535" y="277" text-anchor="middle" font-size="15">guard hook が secrets / PII / canonical status をブロック</text>
+      </svg>
+
+      <p class="note">
+        <strong>重要:</strong> <code>status: canonical</code> を agent が自動で付けることは禁止です。
+        正本化は review 後に repo docs へ反映します。
+      </p>
+    </section>
+
+    <section>
+      <h2>検証コマンド</h2>
+      <p>このプロトタイプは Python 標準ライブラリだけで検証できます。</p>
+      <pre><code>$env:PYTHONDONTWRITEBYTECODE='1'
+python -m unittest tests/test_memory_kernel_scripts.py
+python scripts/check_agents_size.py
+python scripts/scan_memory_secrets.py C:/Users/aokuni/Obsidian/AI-Memory-Vault/00-inbox
+python scripts/check_docs_links.py docs</code></pre>
+
+      <div class="grid two">
+        <div class="mini-card">
+          <h3>secret scan</h3>
+          <p><code>scan_memory_secrets.py</code> は API key、token、password、private key、email、電話番号候補を検出します。</p>
+        </div>
+        <div class="mini-card">
+          <h3>pre-memory-write hook</h3>
+          <p><code>pre_memory_write.py</code> は <code>00-inbox/</code> 以外への agent 書き込みと unsafe content をブロックします。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>MCP を使う場合</h2>
+      <p>
+        <code>.codex/config.example.toml</code> に Basic Memory 風の設定例があります。
+        実際に使うには、ローカル環境で MCP server の起動コマンドを用意してください。
+      </p>
+      <pre><code>[mcp_servers.basic-memory]
+command = "uvx"
+args = ["basic-memory", "mcp"]</code></pre>
+
+      <ol>
+        <li><code>uvx</code> または同等の MCP 起動コマンドを PATH に通す。</li>
+        <li>vault root を <code>C:/Users/aokuni/Obsidian/AI-Memory-Vault</code> に向ける。</li>
+        <li>許可 tool は search、read_note、write_note to inbox に絞る。</li>
+        <li>agent には外部 memory を正本扱いしないよう指示する。</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>運用チェックリスト</h2>
+      <ul class="checklist">
+        <li>作業前に <code>AGENTS.md</code> または <code>CLAUDE.md</code> を読む。</li>
+        <li>非自明な変更では <code>docs/ai/INDEX.md</code> から必要 docs を辿る。</li>
+        <li>外部 memory は不足時だけ検索する。</li>
+        <li>memory note は <code>00-inbox/</code> にだけ書く。</li>
+        <li>secrets、token、顧客情報、個人情報を memory に保存しない。</li>
+        <li>新しい知見は proposal にして証拠を書く。</li>
+        <li>完了報告前に関連する検証コマンドを実行する。</li>
+        <li>promotion は人間 review 後に repo docs へ反映する。</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>Generated for <code>the-vault</code>. Open this file directly in a browser: <code>docs/usage-guide.html</code>.</p>
+    </div>
+  </footer>
+</body>
+</html>

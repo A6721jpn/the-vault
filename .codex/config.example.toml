@@ -1,0 +1,18 @@
+[features]
+memories = true
+hooks = true
+
+[mcp_servers.basic-memory]
+command = "uvx"
+args = ["basic-memory", "mcp"]
+
+enabled_tools = [
+  "search",
+  "read_note",
+  "write_note",
+  "recent_activity",
+  "build_context",
+]
+
+[memories]
+disable_on_external_context = true

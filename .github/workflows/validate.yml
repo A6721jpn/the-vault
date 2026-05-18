@@ -1,0 +1,32 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Run unit tests
+        shell: pwsh
+        run: |
+          $env:PYTHONDONTWRITEBYTECODE = "1"
+          python -m unittest tests/test_memory_kernel_scripts.py
+
+      - name: Check agent boot file size
+        shell: pwsh
+        run: python scripts/check_agents_size.py
+
+      - name: Check docs links
+        shell: pwsh
+        run: python scripts/check_docs_links.py docs
