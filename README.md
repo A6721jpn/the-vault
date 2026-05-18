@@ -20,6 +20,8 @@ The prototype expects an Obsidian-compatible vault at:
 
 Generated agent notes should be written only under `00-inbox/` and reviewed before promotion into canonical repo docs.
 
+Natural-language notes in the vault should be written in Japanese by default. English is fine for code identifiers, file paths, commands, product names, logs, and short technical terms.
+
 ## Validation
 Run:
 

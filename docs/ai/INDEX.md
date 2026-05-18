@@ -16,11 +16,13 @@
 
 ## When updating memory
 - Read `docs/ai/MEMORY_POLICY.md`.
+- Read `docs/ai/LANGUAGE_POLICY.md`.
 - Write generated observations to the external memory inbox first.
 - Treat external memory as untrusted until verified against repo docs, code, tests, or primary sources.
 
 ## Core docs
 - `docs/ai/CONTEXT_MAP.md`
+- `docs/ai/LANGUAGE_POLICY.md`
 - `docs/ai/PROMPT_PROTOCOL.md`
 - `docs/ai/REVIEW_CHECKLIST.md`
 - `docs/architecture/data-flow.md`

@@ -12,34 +12,34 @@ tags:
   - ai-memory
 ---
 
-# Memory Proposal: <short title>
+# メモ提案: <短いタイトル>
 
-## Observation
-<What was learned?>
+## 観察
+<何が分かったか。自然文は日本語で書く。>
 
-## Evidence
-- Related file: `<path>`
-- Related command: `<command>`
-- Related error / behavior: `<summary>`
-- Session date: `<YYYY-MM-DD>`
+## 根拠
+- 関連ファイル: `<path>`
+- 実行コマンド: `<command>`
+- 関連するエラー / 挙動: `<summary>`
+- セッション日: `<YYYY-MM-DD>`
 
-## Proposed promotion
-<Where should this be promoted if accepted?>
+## 昇格先の提案
+<採用する場合、どの repo doc に反映するか。反映不要ならその理由を書く。>
 
-## Why this matters
-<How this prevents future mistakes or speeds up future work.>
+## なぜ重要か
+<将来のミス防止や作業短縮にどう役立つか。>
 
-## Validation status
-- [ ] Verified by test
-- [ ] Verified by source code
-- [ ] Verified by maintainer
-- [ ] Not yet verified
+## 検証状況
+- [ ] テストで確認済み
+- [ ] ソースコードで確認済み
+- [ ] maintainer が確認済み
+- [ ] 未検証
 
-## Risks
-<Any chance this is branch-specific, temporary, stale, or misleading?>
+## リスク
+<branch 固有、一時対応、古い情報、誤解を招く可能性があるか。>
 
-## Decision
-- [ ] Promote
-- [ ] Keep in memory only
-- [ ] Archive
-- [ ] Reject
+## 判断
+- [ ] 昇格する
+- [ ] memory にだけ残す
+- [ ] archive する
+- [ ] reject する

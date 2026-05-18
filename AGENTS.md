@@ -20,4 +20,5 @@
 ## Memory policy
 - Do not store secrets, credentials, customer data, or private tokens in memory.
 - Write new observations to the external memory inbox as a proposal.
+- Write external memory notes in Japanese by default; English is acceptable for identifiers, commands, file paths, product names, logs, and short terms.
 - Do not edit `AGENTS.md`, `CLAUDE.md`, ADRs, or memory policy without explicit permission.

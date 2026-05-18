@@ -7,6 +7,7 @@
 - Architecture decisions already visible in the repo.
 - Known pitfalls and verified workarounds.
 - Non-sensitive tool usage notes.
+- Japanese-first notes that follow `docs/ai/LANGUAGE_POLICY.md`.
 
 ## Disallowed
 - Secrets, credentials, API keys, session tokens.
@@ -26,3 +27,4 @@
 - Each promoted item must link to evidence: file path, command output, issue, PR, ADR, or session summary.
 - Stale or contradicted notes must be archived, not silently reused.
 - Do not promote notes that contain secrets, credentials, customer data, or private personal data.
+- Review generated memory for language quality. Natural-language content should be mostly Japanese, with English limited to identifiers, commands, product names, logs, and short technical terms.

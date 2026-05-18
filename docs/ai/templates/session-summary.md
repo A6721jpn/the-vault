@@ -7,29 +7,29 @@ status: generated
 sensitivity: low
 ---
 
-# Session Summary: <task title>
+# セッション要約: <タスク名>
 
-## Goal
-<Original task.>
+## 目的
+<元の依頼。自然文は日本語で書く。>
 
-## Changes made
-- <Changed file or behavior>
+## 変更内容
+- <変更したファイルや挙動>
 
-## Commands run
+## 実行したコマンド
 - `<command>`: pass | fail | not run
 
-## Key findings
-- <Finding>
+## 主な発見
+- <分かったこと>
 
-## Memory delta
-### Promote to docs
-- <Candidate item>
+## 記憶差分
+### docs に昇格する候補
+- <候補>
 
-### Keep as working memory
-- <Candidate item>
+### 作業記憶として残す候補
+- <候補>
 
-### Discard
-- <Temporary or low-confidence item>
+### 捨てるもの
+- <一時的、または信頼度が低いもの>
 
-## Unresolved questions
-- <Question>
+## 未解決の質問
+- <質問>
