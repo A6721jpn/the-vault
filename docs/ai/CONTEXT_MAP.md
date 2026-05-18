@@ -20,3 +20,9 @@ Read:
 - `docs/ai/MEMORY_POLICY.md`
 - `docs/ai/templates/memory-proposal.md`
 - `docs/ai/templates/session-summary.md`
+
+## For human development decisions
+Read:
+- `docs/ai/DECISION_LOG_POLICY.md`
+- `docs/ai/templates/development-decision.md`
+- External vault project decision log

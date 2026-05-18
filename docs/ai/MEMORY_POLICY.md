@@ -8,6 +8,7 @@
 - Known pitfalls and verified workarounds.
 - Non-sensitive tool usage notes.
 - Japanese-first notes that follow `docs/ai/LANGUAGE_POLICY.md`.
+- Human development decisions, when they include criteria, result, and review conditions.
 
 ## Disallowed
 - Secrets, credentials, API keys, session tokens.
@@ -28,3 +29,4 @@
 - Stale or contradicted notes must be archived, not silently reused.
 - Do not promote notes that contain secrets, credentials, customer data, or private personal data.
 - Review generated memory for language quality. Natural-language content should be mostly Japanese, with English limited to identifiers, commands, product names, logs, and short technical terms.
+- Human decision records should preserve the criteria and result. If the decision changes later, append the new decision instead of silently overwriting the old one.

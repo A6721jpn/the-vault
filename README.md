@@ -22,6 +22,8 @@ Generated agent notes should be written only under `00-inbox/` and reviewed befo
 
 Natural-language notes in the vault should be written in Japanese by default. English is fine for code identifiers, file paths, commands, product names, logs, and short technical terms.
 
+Human development decisions can be recorded with criteria, options, result, impact, and review conditions. See `docs/ai/DECISION_LOG_POLICY.md`.
+
 ## Validation
 Run:
 
