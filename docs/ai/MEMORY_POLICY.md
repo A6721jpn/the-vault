@@ -25,6 +25,7 @@
 
 ## Promotion rules
 - Generated memory must be reviewed before becoming canonical.
+- Promotion into repo docs requires an explicit human approval or an approved review workflow.
 - Each promoted item must link to evidence: file path, command output, issue, PR, ADR, or session summary.
 - Stale or contradicted notes must be archived, not silently reused.
 - Do not promote notes that contain secrets, credentials, customer data, or private personal data.

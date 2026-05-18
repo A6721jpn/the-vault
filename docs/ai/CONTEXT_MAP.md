@@ -21,6 +21,12 @@ Read:
 - `docs/ai/templates/memory-proposal.md`
 - `docs/ai/templates/session-summary.md`
 
+## For promotion review
+Read:
+- `docs/ai/PROMOTION_PLAYBOOK.md`
+- `docs/ai/REVIEW_CHECKLIST.md`
+- `docs/ai/templates/promotion-review.md`
+
 ## For human development decisions
 Read:
 - `docs/ai/DECISION_LOG_POLICY.md`

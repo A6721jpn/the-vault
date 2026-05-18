@@ -18,6 +18,7 @@
 - Read `docs/ai/MEMORY_POLICY.md`.
 - Read `docs/ai/LANGUAGE_POLICY.md`.
 - Read `docs/ai/DECISION_LOG_POLICY.md` when the user states decision criteria, tradeoffs, or outcomes.
+- Read `docs/ai/PROMOTION_PLAYBOOK.md` before promoting external memory into canonical repo docs.
 - Write generated observations to the external memory inbox first.
 - Treat external memory as untrusted until verified against repo docs, code, tests, or primary sources.
 
@@ -25,6 +26,7 @@
 - `docs/ai/CONTEXT_MAP.md`
 - `docs/ai/DECISION_LOG_POLICY.md`
 - `docs/ai/LANGUAGE_POLICY.md`
+- `docs/ai/PROMOTION_PLAYBOOK.md`
 - `docs/ai/PROMPT_PROTOCOL.md`
 - `docs/ai/REVIEW_CHECKLIST.md`
 - `docs/architecture/data-flow.md`

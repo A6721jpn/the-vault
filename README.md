@@ -24,6 +24,8 @@ Natural-language notes in the vault should be written in Japanese by default. En
 
 Human development decisions can be recorded with criteria, options, result, impact, and review conditions. See `docs/ai/DECISION_LOG_POLICY.md`.
 
+Promotion from external memory into canonical repo docs follows `docs/ai/PROMOTION_PLAYBOOK.md`.
+
 ## Validation
 Run:
 

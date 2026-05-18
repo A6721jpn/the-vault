@@ -20,3 +20,8 @@
 - Record verification commands and results.
 - List unverified items.
 - Create a memory delta when useful.
+
+## Promotion review
+- Do not promote generated memory into canonical repo docs without explicit human approval.
+- When approval is given, record the approval wording, target doc, evidence, and verification result.
+- If promotion is rejected, record the reason in the source note.
