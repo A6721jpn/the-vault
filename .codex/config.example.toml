@@ -3,13 +3,15 @@ memories = true
 hooks = true
 
 [mcp_servers.basic-memory]
-command = "uvx"
-args = ["basic-memory", "mcp"]
+command = "C:\\Users\\aokuni\\.local\\bin\\basic-memory.exe"
+args = ["mcp", "--project", "codex-vault"]
 
 enabled_tools = [
-  "search",
+  "list_memory_projects",
+  "search_notes",
   "read_note",
   "write_note",
+  "edit_note",
   "recent_activity",
   "build_context",
 ]

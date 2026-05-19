@@ -17,6 +17,7 @@ Read:
 
 ## For memory updates
 Read:
+- `docs/ai/CODEX_CONNECTION.md`
 - `docs/ai/MEMORY_POLICY.md`
 - `docs/ai/templates/memory-proposal.md`
 - `docs/ai/templates/session-summary.md`

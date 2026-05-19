@@ -26,6 +26,8 @@ Human development decisions can be recorded with criteria, options, result, impa
 
 Promotion from external memory into canonical repo docs follows `docs/ai/PROMOTION_PLAYBOOK.md`.
 
+Codex connection details are documented in `docs/ai/CODEX_CONNECTION.md`.
+
 ## Validation
 Run:
 

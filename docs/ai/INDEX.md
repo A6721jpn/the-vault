@@ -24,6 +24,7 @@
 
 ## Core docs
 - `docs/ai/CONTEXT_MAP.md`
+- `docs/ai/CODEX_CONNECTION.md`
 - `docs/ai/DECISION_LOG_POLICY.md`
 - `docs/ai/LANGUAGE_POLICY.md`
 - `docs/ai/PROMOTION_PLAYBOOK.md`

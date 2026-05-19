@@ -6,7 +6,9 @@
 ## Environment
 - Repository root: `C:/github_repo/the-vault`
 - External vault: `C:/Users/aokuni/Obsidian/AI-Memory-Vault`
-- MCP runtime: not verified because `uvx` is not available on PATH.
+- MCP runtime: verified through Basic Memory 0.21.1 installed as a user tool.
+- Basic Memory project: `codex-vault`
+- Codex user config: `C:/Users/aokuni/.codex/config.toml`
 
 ## Checks run
 - `python -m unittest tests/test_memory_kernel_scripts.py`: pass
@@ -23,6 +25,17 @@
 - Scenario 5: prepared, review command documented.
 
 ## Remaining gaps
-- Install or expose a Basic Memory-compatible MCP server, then verify search, read, and inbox write through MCP tools.
+- Restart Codex and confirm the newly configured `basic-memory` MCP tools are visible in the active tool list.
 - Run the five evaluation scenarios with a baseline agent session and a memory-enabled session.
 - Promote or archive the smoke-test proposal after human review.
+
+## 2026-05-19 connection update
+
+- Installed `uv` as a user Python tool.
+- Installed Basic Memory 0.21.1.
+- Added Basic Memory project `codex-vault` at `C:/Users/aokuni/Obsidian/AI-Memory-Vault`.
+- Set `codex-vault` as the default project.
+- Added `basic-memory` MCP server to `C:/Users/aokuni/.codex/config.toml`.
+- Added global memory instructions to `C:/Users/aokuni/.codex/AGENTS.md`.
+- Reindexed the vault.
+- Verified `search-notes`, `read-note`, and `write-note`.
